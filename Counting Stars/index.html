@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <style>
-        .container{padding: 100px 40px; letter-spacing: 1px; text-indent: 1px;}
+        .container{padding: 100px 40px; letter-spacing: 1px; text-indent: 1px; white-space: pre-line}
         .container ul{overflow: hidden;}
         .container ul > li{float: left; width: 25px; line-height: 25px; text-align: center; font-size: 18px; list-style: none;}
     </style>
 </head>
 <body>
     <div class="container">
-        *<br />
-        **<br />
-        ***<br />
-        ****<br />
+        *
+        **
+        ***
+        ****
         *****
     </div>
     <div class="container">
@@ -35,7 +35,17 @@
         *****
     </div>
     <script>
+        console.log('*');
+        console.log('**');
+        console.log('***');
+        console.log('****');
+        console.log('*****');
 
+        for(let i = 0; i < 5; i++){
+            for(let j = 0; j <= i; j++ ){
+                console.log('*');
+            }
+        }
     </script>
 </body>
 </html>

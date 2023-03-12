@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위바위보</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <style>
+        img{width: 100%;}
+        label{padding: 10px; display: inline-block; border-radius: 50%; box-sizing: border-box; width: 100px; background: #f6f6f6}
+        input[type='radio']{width: 1px; height: 1px;}
+        input[type='radio']:checked + label{background: #ccebff;}
+
+        #result{display: none;}
+        #result.on{display: block;}
+
+        .type img{display: none; width: 200px;}
+        .type img.on{display: block;}
+
+        .user_type:before{content: "YOU"}
+        .pc_type:before{content: "PC"}
+    </style>
+</head>
+<body>
+    <form id="form" onsubmit="return false;">
+        <!-- <input type="text" placeholder="가위 바위 보!" id="user"> -->
+        <input type="radio" name="type" id="radio1" value="1" required><label for="radio1"><img src="https://cdn-icons-png.flaticon.com/512/9534/9534501.png" alt="가위"></label>
+        <input type="radio" name="type" id="radio2" value="2" required><label for="radio2"><img src="https://cdn-icons-png.flaticon.com/512/9534/9534498.png" alt="바위"></label>
+        <input type="radio" name="type" id="radio3" value="3" required><label for="radio3"><img src="https://cdn-icons-png.flaticon.com/512/9534/9534504.png" alt="보"></label>
+        <button>대결</button>
+    </form>
+    <div id="result">
+        <p></p>
+
+        <div class="user_type type">
+            <img src="https://cdn-icons-png.flaticon.com/512/9534/9534501.png" alt="가위">
+            <img src="https://cdn-icons-png.flaticon.com/512/9534/9534498.png" alt="바위">
+            <img src="https://cdn-icons-png.flaticon.com/512/9534/9534504.png" alt="보">
+        </div>
+        <div class="pc_type type">
+            <img src="https://cdn-icons-png.flaticon.com/512/9534/9534501.png" alt="가위">
+            <img src="https://cdn-icons-png.flaticon.com/512/9534/9534498.png" alt="바위">
+            <img src="https://cdn-icons-png.flaticon.com/512/9534/9534504.png" alt="보">
+        </div>
+    </div>
+    <script>
+        // 랜덤으로 숫자 만드는 함수
+        function rand(min, max){
+            return Math.floor(Math.random() * max) + min
+        }
+
+        // 숫자 => 가위, 바위, 보
+        function type(num){
+            if(num === 1){
+                return '가위';
+            }else if(num === 2){
+                return '바위';
+            }else if(num === 3){
+                return '보';
+            }
+        }
+
+        $('#form').submit(function(){
+            let PC = rand(1, 3);
+            // const USER = Number($('#user').val());
+            const USER = Number($('input:checked').val());
+            const RESULT = Math.abs(PC - USER);
+            let msg;
+
+
+            $('.user_type img').removeClass('on').eq(USER - 1).addClass('on');
+            $('.pc_type img').removeClass('on').eq(PC - 1).addClass('on');
+            $('#result').addClass('on')
+
+            console.log('PC = ' + type(PC));
+            console.log('USER = ' + type(USER));
+
+            if(RESULT === 0){
+                console.log('비김');
+                msg = '비김';
+            }else if(RESULT === 1){
+                if(PC > USER){
+                    console.log('PC 승리');
+                    msg = 'PC 승리';
+                }else{
+                    console.log('당신의 승리!');    
+                    msg = '당신의 승리!';
+                }
+            }else if(RESULT === 2){
+                if(PC < USER){
+                    console.log('PC 승리');
+                    msg = 'PC 승리';
+                }else{
+                    console.log('당신의 승리!');
+                    msg = '당신의 승리!';
+                }
+            }
+
+            $('input').prop('checked', false)
+            $('#result p').text(msg)
+        });
+        
+        $(function(){
+            
+        });
+
+    </script>
+</body>
+</html>
